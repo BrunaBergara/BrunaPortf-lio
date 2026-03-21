@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio profissional – Web & Design</title>
+  <style>
+    /* Base reset */
+    body, h1, h2, h3, p, a, ul, li {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #1e2a78;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero section */
+    .hero {
+      background-color: #1e2a78;
+      color: #fff;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1e2a78;
+    }
+    section p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    .highlight {
+      color: #f1c232;
+    }
+
+    /* Projects grid */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .project-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+    .project-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .project-content {
+      padding: 20px;
+    }
+    .project-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #1e2a78;
+    }
+    .project-content p {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .project-content a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #f1c232;
+      color: #1e2a78;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+    .project-content a:hover {
+      background-color: #e2b321;
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    .service-card h3 {
+      color: #1e2a78;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    /* Contact */
+    .contact {
+      background-color: #1e2a78;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .contact h3 {
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+    .contact a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: 2px solid #f1c232;
+      color: #f1c232;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .contact a:hover {
+      background-color: #f1c232;
+      color: #1e2a78;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <h1>Portfólio Profissional</h1>
+      <p>Criação de sites, landing pages, artes e gestão de redes sociais para destacar negócios no mundo digital.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h2>Sobre Mim</h2>
+      <p>Sou um profissional formado em Análise e Desenvolvimento de Sistemas com pós‑graduação, apaixonado por <span class="highlight">design e tecnologia</span>. Especializado em desenvolver experiências digitais que geram valor, ofereço serviços de criação de sites responsivos, landing pages persuasivas, design gráfico e gerenciamento de redes sociais.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Projetos Recentes</h2>
+      <div class="projects">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1e2a78/f1c232?text=Buttes+Chaumont+Servi%C3%A7os" alt="Buttes Chaumont Serviços">
+          <div class="project-content">
+            <h3>Buttes Chaumont Serviços</h3>
+            <p>Site institucional para empresa especializada em documentos e apoio administrativo. Design elegante em preto e dourado com ênfase na credibilidade e eficiência, refletindo a seriedade do negócio.</p>
+            <a href="https://butteschaumontserv.com/" target="_blank">Visitar site</a>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1e2a78/f1c232?text=FMAIS+Alimentos" alt="FMAIS Alimentos">
+          <div class="project-content">
+            <h3>FMAIS Alimentos</h3>
+            <p>Landing page moderna para linha de panificação e confeitaria. Layout clean em tons claros e chamada para ação que destaca a qualidade e o sabor dos produtos da empresa.</p>
+            <a href="https://fmaisalimentos.com.br/" target="_blank">Visitar site</a>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1e2a78/f1c232?text=Redes+Sociais+Nippon" alt="Padaria Nippon Tatuí">
+          <div class="project-content">
+            <h3>Padaria Nippon Tatuí</h3>
+            <p>Gestão de redes sociais para panificadora & confeitaria tradicional. Produção de artes e campanhas atraentes que divulgam pães, bolos e promoções, aumentando o engajamento do público local.</p>
+            <a href="#">Ver postagens</a>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1e2a78/f1c232?text=Design+Gr%C3%A1fico" alt="Artes e Flyers">
+          <div class="project-content">
+            <h3>Artes e Flyers</h3>
+            <p>Criação de flyers, banners e artes digitais personalizados para diferentes clientes e eventos. Design criativo que comunica a mensagem de forma clara e visualmente atraente.</p>
+            <a href="#">Ver exemplos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Serviços</h2>
+      <div class="services">
+        <div class="service-card">
+          <h3>Criação de Sites</h3>
+          <p>Desenvolvimento de sites profissionais e responsivos que transmitem confiança e facilitam a conversão de visitantes em clientes.</p>
+        </div>
+        <div class="service-card">
+          <h3>Landing Pages</h3>
+          <p>Páginas de captura focadas em marketing digital, otimizadas para conversão e geração de leads qualificados.</p>
+        </div>
+        <div class="service-card">
+          <h3>Design Gráfico</h3>
+          <p>Produção de artes, flyers e identidades visuais que refletem a essência da marca e impactam positivamente o público.</p>
+        </div>
+        <div class="service-card">
+          <h3>Gestão de Redes Sociais</h3>
+          <p>Planejamento e criação de conteúdo estratégico para aumentar o engajamento e a presença digital de empresas de diferentes segmentos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container contact">
+      <h3>Entre em Contato</h3>
+      <p>Quer impulsionar seu negócio com um site profissional, artes incríveis ou campanhas nas redes sociais? Vamos conversar!</p>
+      <a href="mailto:contato@exemplo.com">Solicitar orçamento</a>
+    </div>
+  </section>
+
+  <footer style="text-align:center; padding: 20px 0; font-size:0.9rem; color: #666;">
+    © 2026 – Todos os direitos reservados. Portfólio desenvolvido para demonstração.
+  </footer>
+</body>
+</html>
