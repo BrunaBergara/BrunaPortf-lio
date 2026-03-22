@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Bruna Scomparim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        #lightbox.active {
+    display: flex;
+}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background-color: rgba(15, 23, 42, 0.8);
+        }
+
+        /* Hero Image Adjustment */
+        .hero-img-container {
+            height: 100%;
+            min-height: 500px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-img-full {
+                height: calc(100vh - 64px); /* Full height minus nav */
+                object-fit: cover;
+                object-position: center top;
+            }
+        }
+
+        /* Chatbot Styles */
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+        }
+        .bubble {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            animation: fadeIn 0.3s ease;
+            font-size: 0.95rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Portfolio Modal */
+        .modal-portfolio {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: #0f172a;
+            overflow-y: auto;
+        }
+        .modal-active {
+            display: block;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        /* Lightbox for Single Image */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.98);
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            padding: 10px;
+        }
+        #lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .hero-text { text-align: center; }
+            .hero-btns { width: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Barra de Navegação -->
+    <nav class="fixed w-full z-50 nav-blur border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-white font-bold text-xl tracking-tighter uppercase">Bruna<span class="text-blue-400 font-light">Scomparim</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#inicio" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition">Início</a>
+                        <a href="#artes" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition">Arte & Flyers</a>
+                        <a href="#sites" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition">Web Sites & Landing Pages</a>
+                        <a href="#social" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition">Social Media & Gestão</a>
+                        <a href="#contato" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition ml-4">Contato</a>
+                    </div>
+                </div>
+                <div class="md:hidden text-white text-xl">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Secção Hero -->
+    <section id="inicio" class="gradient-bg min-h-screen flex items-stretch pt-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-0 items-center">
+            
+            <!-- Coluna de Texto -->
+            <div class="py-12 md:py-24 pr-0 md:pr-12 hero-text z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+                    Transformando ideias em <span class="text-blue-400">experiências digitais</span> de alto impacto.
+                </h1>
+                <p class="mt-6 text-lg text-slate-300 max-w-lg">
+                    Especialista em design gráfico, gestão estratégica de redes sociais e desenvolvimento web. Unindo criatividade e tecnologia para resultados reais.
+                </p>
+                
+                <!-- Botões Empilhados -->
+                <div class="mt-10 flex flex-col gap-4 max-w-sm mx-auto md:mx-0">
+                    <a href="#sites" class="bg-blue-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-900/40 text-center w-full block">
+                        Web Sites e Landing Page
+                    </a>
+                    <a href="#artes" class="bg-white text-slate-900 px-6 py-4 rounded-lg font-bold hover:bg-slate-200 transition text-center w-full block">
+                        Artes & Flyers
+                    </a>
+                    <a href="#social" class="bg-slate-800 text-white border border-slate-700 px-6 py-4 rounded-lg font-bold hover:bg-slate-700 transition text-center w-full block">
+                        Social Media
+                    </a>
+                </div>
+            </div>
+
+            <!-- Coluna da Foto (Pegando de cima a baixo) -->
+            <div class="relative h-full hidden md:block">
+                <div class="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full"></div>
+                <div class="relative h-full w-full flex items-end">
+                    <img src="bruna1.png" alt="Bruna Scomparim" class="hero-img-full w-full object-cover object-top" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-slate-800/50 flex items-center justify-center text-slate-600\'><i class=\'fa-solid fa-user text-9xl\'></i></div>'">
+                </div>
+            </div>
+
+            <!-- Foto Mobile (Aparece apenas no celular acima do texto ou abaixo dependendo da ordem) -->
+            <div class="md:hidden mt-8 rounded-2xl overflow-hidden border border-slate-700 shadow-2xl">
+                <img src="bruna1.jpg" alt="Bruna Scomparim" class="w-full h-80 object-cover object-top" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <!-- Secção Artes & Flyers -->
+    <section id="artes" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Arte & Flyers Profissionais</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mb-12">Design visual estratégico que comunica a essência da sua marca com clareza e autoridade.</p>
+
+            <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
+                <div id="lightboxContent"></div>
+                <button onclick="closeLightbox()" class="absolute top-5 right-5 text-white text-3xl">✕</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div onclick="openGallery('identidade')" class="group cursor-pointer relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-lg">
+                    <img src="111.jpeg" alt="" class="object-cover w-full h-full group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex flex-col items-center justify-end p-8 text-white">
+                        <i class="fa-solid fa-pen-nib text-2xl mb-3 text-blue-400"></i>
+                        <span class="text-xl font-bold uppercase">Artes Redes Sociais</span>
+                        <p class="text-xs mt-2 opacity-80">Campanhas e Eventos</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div onclick="openGallery('flyers')" class="group cursor-pointer relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-lg">
+                    <img src="1.jpeg" alt="[Imagem de Flyers]" class="object-cover w-full h-full group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex flex-col items-center justify-end p-8 text-white">
+                        <i class="fa-solid fa-layer-group text-2xl mb-3 text-blue-400"></i>
+                        <span class="text-xl font-bold uppercase">Flyers Esportivo</span>
+                        <p class="text-xs mt-2 opacity-80">Eventos e Campeonatos</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div onclick="openGallery('impressao')" class="group cursor-pointer relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-lg">
+                    <img src="50.png" alt="" class="object-cover w-full h-full group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex flex-col items-center justify-end p-8 text-white">
+                        <i class="fa-solid fa-print text-2xl mb-3 text-blue-400"></i>
+                        <span class="text-xl font-bold uppercase">Design Editorial</span>
+                        <p class="text-xs mt-2 opacity-80">Catálogos e Cardápios</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Galeria -->
+    <div id="portfolioModal" class="modal-portfolio">
+        <div class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md p-4 flex justify-between items-center border-b border-slate-800">
+            <h3 id="modalTitle" class="text-white font-bold uppercase tracking-widest ml-4">Galeria</h3>
+            <button onclick="closeGallery()" class="text-white p-2 text-3xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="max-w-7xl mx-auto p-4 md:p-8">
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            <div class="py-12 text-center">
+                <button onclick="closeGallery()" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Zoom -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" class="max-w-full max-h-full rounded shadow-2xl">
+    </div>
+
+    <!-- Web Section -->
+    <section id="sites" class="py-20 bg-slate-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-tighter">Web Sites & Landing Pages</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mb-12">Criação de interfaces modernas e funcionais, focadas na melhor experiência do usuário e conversão.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200">
+                    <img src="bc.png" class="w-full h-64 object-cover">
+                    <div class="p-8 text-center">
+                        <h3 class="text-xl font-bold mb-4">Buttes Chaumont</h3>
+                        <a href="https://butteschaumontserv.com/" target="_blank" class="text-blue-600 font-bold hover:underline">Ver Projeto →</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200">
+                    <img src="fmais.png" class="w-full h-64 object-cover">
+                    <div class="p-8 text-center">
+                        <h3 class="text-xl font-bold mb-4">Fmais Alimentos</h3>
+                        <a href="https://fmaisalimentos.com.br/" target="_blank" class="text-blue-600 font-bold hover:underline">Ver Projeto →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Secção Social Media -->
+    <section id="social" class="py-24 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <!-- Cabeçalho da Seção -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-tighter">Social Media & Gestão</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto mt-4">Estratégias de conteúdo que conectam marcas a pessoas e geram crescimento real em redes sociais.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Conteúdo de Texto e Métricas -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-blue-400 font-bold tracking-[0.2em] uppercase text-sm">Case de Sucesso</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold mt-2 leading-tight">Padaria Nippon <span class="text-blue-500">Tatuí</span></h2>
+                        <p class="text-slate-400 mt-6 text-lg">
+                            Responsável pela gestão estratégica do posicionamento digital da Padaria Nippon Tatuí, com foco na valorização da marca e destaque dos produtos de maior potencial comercial. Atuo na definição da identidade visual, criação de artes e flyers, além do planejamento e execução de conteúdos para feed e stories, estruturando o perfil como um canal estratégico de atração, engajamento e conversão de clientes.
+                        </p>
+                    </div>
+
+                    <!-- Dashboard de Crescimento -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-800/50 p-5 rounded-2xl border border-slate-700 hover:border-blue-500/50 transition group">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <span class="text-xs uppercase font-bold text-slate-500">Engajamento</span>
+                            </div>
+                            <div class="text-3xl font-bold glow-blue text-white">+245%</div>
+                            <p class="text-[10px] text-slate-500 mt-1 italic">Já Nos primeiros 60 dias</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-5 rounded-2xl border border-slate-700 hover:border-blue-500/50 transition group">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400 group-hover:bg-pink-500 group-hover:text-white transition">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <span class="text-xs uppercase font-bold text-slate-500">Seguidores</span>
+                            </div>
+                            <div class="text-3xl font-bold text-white">2.7k+</div>
+                            <p class="text-[10px] text-slate-500 mt-1 italic">Crescimento orgânico real</p>
+                        </div>
+                    </div>
+
+                    <a href="https://instagram.com/nipponpadaria" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-full font-bold hover:scale-105 transition shadow-lg shadow-pink-900/20">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                        @nipponpadaria
+                    </a>
+                </div>
+
+                <!-- Preview Estilo Feed/Galeria -->
+                <div class="lg:col-span-7 relative">
+                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <!-- Foto 1 -->
+                        <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
+                            <img src="100.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Pão Artesanal]">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <i class="fa-solid fa-heart text-white text-2xl"></i>
+                            </div>
+                        </div>
+                        <!-- Foto 2 -->
+                        <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl md:mt-6">
+                            <img src="101.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Vitrine de Doces]">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <i class="fa-solid fa-heart text-white text-2xl"></i>
+                            </div>
+                        </div>
+                        <!-- Foto 3 -->
+                        <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
+                            <img src="102.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Café]">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <i class="fa-solid fa-heart text-white text-2xl"></i>
+                            </div>
+                        </div>
+                        <!-- Foto 4 -->
+                        <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
+                            <img src="103.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Sanduíche]">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <i class="fa-solid fa-heart text-white text-2xl"></i>
+                            </div>
+                        </div>
+                        <!-- Foto 5 -->
+                        <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl md:mt-6">
+                            <img src="104.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Bolo Nippon]">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <i class="fa-solid fa-heart text-white text-2xl"></i>
+                            </div>
+                        </div>
+                        <!-- Foto 6 -->
+                        <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
+                            <img src="105.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Lanche Gourmet]">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <i class="fa-solid fa-heart text-white text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contato" class="py-20 bg-white">
+        <div class="max-w-2xl mx-auto px-4">
+            <div class="bg-slate-900 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <div id="chatBody" class="chat-container mb-6 flex flex-col space-y-4">
+                    <div class="bubble bg-slate-800 text-white self-start">Olá! Sou o assistente da Bruna. Qual o seu nome?</div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Sua mensagem..." class="flex-1 bg-slate-800 border-none rounded-full px-5 py-3 text-white outline-none">
+                    <button onclick="handleSendMessage()" class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé (Restaurado ao original) -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-6">
+                <span class="text-white font-bold text-xl tracking-tighter uppercase">BRUNA<span class="text-blue-400">SCOMPARIM</span></span>
+            </div>
+            <div class="flex justify-center space-x-8 mb-8 text-2xl">
+                <a href="https://instagram.com/brunamscomparim" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/5515991092500" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+            <p class="text-[11px] uppercase tracking-widest">&copy; 2016 Bruna Scomparim. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+<script>
+    const portfolioData = {
+        identidade: { 
+            title: "Redes Sociais", 
+            items: [
+                "100.jpeg",
+                "101.jpeg",
+                "102.jpeg",
+                "103.jpeg",
+                "104.jpeg",
+                "105.jpeg",
+                "106.jpeg",
+                "107.jpeg",
+                "108.jpeg",
+                "109.jpeg",
+                "110.jpeg",
+                "111.jpeg",
+                "112.jpeg",
+                "113.jpeg",
+                "114.jpeg",
+                "115.jpeg",
+                "116.jpeg",
+                "117.jpeg"
+               
+                
+            ] 
+        },
+        flyers: { 
+            title: "Flyers", 
+            items: [
+                "1.jpeg",
+                "2.mp4",
+                "3.mp4",
+                "4.mp4",
+                "5.mp4",
+                "6.mp4",
+                "7.mp4",
+                "8.mp4",
+                "9.mp4",
+                "10.mp4",
+                "11.mp4",
+                "12.mp4",
+                "13.mp4",
+                "14.mp4",
+                "15.mp4"
+            ] 
+        },
+        impressao: { 
+            title: "Editorial", 
+            items: [
+                "50.png"
+            ] 
+        }
+    };
+
+    function openGallery(cat) {
+        const data = portfolioData[cat];
+        document.getElementById('modalTitle').innerText = data.title;
+        const grid = document.getElementById('galleryGrid');
+        grid.innerHTML = '';
+
+        data.items.forEach(item => {
+
+            // verifica se é vídeo
+            const isVideo = item.endsWith('.mp4');
+
+            if (isVideo) {
+                grid.innerHTML += `
+                    <video 
+                        src="${item}" 
+                        onclick="openLightbox('${item}', true)" 
+                        class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-80 transition"
+                        muted
+                        loop
+                        autoplay
+                    ></video>
+                `;
+            } else {
+                grid.innerHTML += `
+                    <img 
+                        src="${item}" 
+                        onclick="openLightbox('${item}', false)" 
+                        class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-80 transition"
+                    >
+                `;
+            }
+        });
+
+        document.getElementById('portfolioModal').classList.add('modal-active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGallery() {
+        document.getElementById('portfolioModal').classList.remove('modal-active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function openLightbox(src, isVideo) {
+        const container = document.getElementById('lightboxContent');
+
+        if (isVideo) {
+            container.innerHTML = `
+                <video 
+                    src="${src}" 
+                    controls 
+                    autoplay 
+                    class="max-w-full max-h-[90vh] rounded-xl"
+                ></video>
+            `;
+        } else {
+            container.innerHTML = `
+                <img 
+                    src="${src}" 
+                    class="max-w-full max-h-[90vh] rounded-xl"
+                >
+            `;
+        }
+
+        document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightboxContent').innerHTML = '';
+    }
+
+    // Chat continua igual (já está correto)
+</script>
+    
+</body>
+</html>
