@@ -42,7 +42,9 @@
 
         /* Chatbot Styles */
         .chat-container {
-            height: 400px;
+            height: 50vh;
+            min-height: 250px;
+            max-height: 400px;
             overflow-y: auto;
         }
         .bubble {
@@ -102,7 +104,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <!-- Barra de Navegação -->
     <nav class="fixed w-full z-50 nav-blur border-b border-slate-700/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -125,11 +126,9 @@
         </div>
     </nav>
 
-    <!-- Secção Hero -->
     <section id="inicio" class="gradient-bg min-h-screen flex items-stretch pt-16 overflow-hidden">
         <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-0 items-center">
             
-            <!-- Coluna de Texto -->
             <div class="py-12 md:py-24 pr-0 md:pr-12 hero-text z-10">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
                     Transformando ideias em <span class="text-blue-400">experiências digitais</span> de alto impacto.
@@ -138,7 +137,6 @@
                     Especialista em design gráfico, gestão estratégica de redes sociais e desenvolvimento web. Unindo criatividade e tecnologia para resultados reais.
                 </p>
                 
-                <!-- Botões Empilhados -->
                 <div class="mt-10 flex flex-col gap-4 max-w-sm mx-auto md:mx-0">
                     <a href="#sites" class="bg-blue-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-900/40 text-center w-full block">
                         Web Sites e Landing Page
@@ -152,7 +150,6 @@
                 </div>
             </div>
 
-            <!-- Coluna da Foto (Pegando de cima a baixo) -->
             <div class="relative h-full hidden md:block">
                 <div class="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full"></div>
                 <div class="relative h-full w-full flex items-end">
@@ -160,14 +157,12 @@
                 </div>
             </div>
 
-            <!-- Foto Mobile (Aparece apenas no celular acima do texto ou abaixo dependendo da ordem) -->
             <div class="md:hidden mt-8 rounded-2xl overflow-hidden border border-slate-700 shadow-2xl">
                 <img src="bruna1.jpg" alt="Bruna Scomparim" class="w-full h-80 object-cover object-top" onerror="this.style.display='none'">
             </div>
         </div>
     </section>
 
-    <!-- Secção Artes & Flyers -->
     <section id="artes" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold text-slate-900 mb-4">Arte & Flyers Profissionais</h2>
@@ -179,7 +174,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
                 <div onclick="openGallery('identidade')" class="group cursor-pointer relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-lg">
                     <img src="111.jpeg" alt="" class="object-cover w-full h-full group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex flex-col items-center justify-end p-8 text-white">
@@ -188,7 +182,6 @@
                         <p class="text-xs mt-2 opacity-80">Campanhas e Eventos</p>
                     </div>
                 </div>
-                <!-- Card 2 -->
                 <div onclick="openGallery('flyers')" class="group cursor-pointer relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-lg">
                     <img src="1.jpeg" alt="[Imagem de Flyers]" class="object-cover w-full h-full group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex flex-col items-center justify-end p-8 text-white">
@@ -197,7 +190,6 @@
                         <p class="text-xs mt-2 opacity-80">Eventos e Campeonatos</p>
                     </div>
                 </div>
-                <!-- Card 3 -->
                 <div onclick="openGallery('impressao')" class="group cursor-pointer relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-lg">
                     <img src="50.png" alt="" class="object-cover w-full h-full group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex flex-col items-center justify-end p-8 text-white">
@@ -210,7 +202,6 @@
         </div>
     </section>
 
-    <!-- Modal de Galeria -->
     <div id="portfolioModal" class="modal-portfolio">
         <div class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md p-4 flex justify-between items-center border-b border-slate-800">
             <h3 id="modalTitle" class="text-white font-bold uppercase tracking-widest ml-4">Galeria</h3>
@@ -224,12 +215,10 @@
         </div>
     </div>
 
-    <!-- Lightbox Zoom -->
     <div id="lightbox" onclick="closeLightbox()">
         <img id="lightboxImg" src="" class="max-w-full max-h-full rounded shadow-2xl">
     </div>
 
-    <!-- Web Section -->
     <section id="sites" class="py-20 bg-slate-300">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-tighter">Web Sites & Landing Pages</h2>
@@ -253,17 +242,14 @@
         </div>
     </section>
 
-      <!-- Secção Social Media -->
-    <section id="social" class="py-24 bg-slate-900 text-white overflow-hidden">
+      <section id="social" class="py-24 bg-slate-900 text-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <!-- Cabeçalho da Seção -->
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-tighter">Social Media & Gestão</h2>
                 <p class="text-slate-400 max-w-2xl mx-auto mt-4">Estratégias de conteúdo que conectam marcas a pessoas e geram crescimento real em redes sociais.</p>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <!-- Conteúdo de Texto e Métricas -->
                 <div class="lg:col-span-5 space-y-8">
                     <div>
                         <span class="text-blue-400 font-bold tracking-[0.2em] uppercase text-sm">Case de Sucesso</span>
@@ -273,7 +259,6 @@
                         </p>
                     </div>
 
-                    <!-- Dashboard de Crescimento -->
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-slate-800/50 p-5 rounded-2xl border border-slate-700 hover:border-blue-500/50 transition group">
                             <div class="flex items-center gap-3 mb-2">
@@ -303,48 +288,41 @@
                     </a>
                 </div>
 
-                <!-- Preview Estilo Feed/Galeria -->
                 <div class="lg:col-span-7 relative">
                     <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
                     <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
                     
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <!-- Foto 1 -->
                         <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
                             <img src="100.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Pão Artesanal]">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                                 <i class="fa-solid fa-heart text-white text-2xl"></i>
                             </div>
                         </div>
-                        <!-- Foto 2 -->
                         <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl md:mt-6">
                             <img src="101.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Vitrine de Doces]">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                                 <i class="fa-solid fa-heart text-white text-2xl"></i>
                             </div>
                         </div>
-                        <!-- Foto 3 -->
                         <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
                             <img src="102.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Café]">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                                 <i class="fa-solid fa-heart text-white text-2xl"></i>
                             </div>
                         </div>
-                        <!-- Foto 4 -->
                         <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
                             <img src="103.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Sanduíche]">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                                 <i class="fa-solid fa-heart text-white text-2xl"></i>
                             </div>
                         </div>
-                        <!-- Foto 5 -->
                         <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl md:mt-6">
                             <img src="104.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Bolo Nippon]">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                                 <i class="fa-solid fa-heart text-white text-2xl"></i>
                             </div>
                         </div>
-                        <!-- Foto 6 -->
                         <div class="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
                             <img src="105.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="[Imagem de Lanche Gourmet]">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
@@ -357,7 +335,6 @@
         </div>
     </section>
 
-    <!-- Contact & Footer -->
     <section id="contato" class="py-20 bg-white">
         <div class="max-w-2xl mx-auto px-4">
             <div class="bg-slate-900 rounded-3xl p-6 md:p-8 shadow-2xl">
@@ -372,7 +349,6 @@
         </div>
     </section>
 
-    <!-- Rodapé (Restaurado ao original) -->
     <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="mb-6">
@@ -408,8 +384,6 @@
                 "115.jpeg",
                 "116.jpeg",
                 "117.jpeg"
-               
-                
             ] 
         },
         flyers: { 
@@ -511,7 +485,44 @@
         document.getElementById('lightboxContent').innerHTML = '';
     }
 
-    // Chat continua igual (já está correto)
+    // --- MUDANÇAS DO CHATBOT ---
+
+    function handleSendMessage() {
+        const input = document.getElementById('chatInput');
+        const nomeUsuario = input.value.trim();
+        
+        if (nomeUsuario !== '') {
+            // Adiciona a mensagem (nome) na tela de chat
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML += `<div class="bubble bg-blue-600 text-white self-end ml-auto">${nomeUsuario}</div>`;
+            
+            // Rola o chat para o final
+            chatBody.scrollTop = chatBody.scrollHeight;
+            
+            // Monta a mensagem final personalizada
+            const mensagemWhatsApp = `Olá, Bruna! Meu nome é ${nomeUsuario}. Estou interessado em seus serviços. Pode me dar um retorno?`;
+            const numeroWhatsApp = "5515991092500";
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+            
+            // Abre o WhatsApp em uma nova aba
+            window.open(url, '_blank');
+            
+            // Limpa o campo de digitação
+            input.value = '';
+        }
+    }
+
+    // Permite enviar a mensagem apertando a tecla Enter
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatInput = document.getElementById('chatInput');
+        if(chatInput) {
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSendMessage();
+                }
+            });
+        }
+    });
 </script>
     
 </body>
