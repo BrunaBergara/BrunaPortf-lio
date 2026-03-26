@@ -738,13 +738,17 @@
     
 
     function addMessage(text, type) {
-        const msg = document.createElement("div");
-        msg.classList.add("message", type);
-        msg.innerText = text;
+  const row = document.createElement("div");
+  row.className = "msg-row " + type;
 
-        document.getElementById("messages").appendChild(msg);
-        msg.scrollIntoView();
-    }
+  const bubble = document.createElement("div");
+  bubble.className = "msg " + type;
+  bubble.innerText = text;
+
+  row.appendChild(bubble);
+  messagesEl.appendChild(row);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
 
     function addTyping(){
       const row = document.createElement("div");
@@ -803,7 +807,7 @@ Se quiser, já me diga:
 • qual é o seu negócio
 • e qual resultado você quer alcançar`;
 
-      addMessage("bot", firstMessage);
+      addMessage(firstMessage, "bot");
       state.conversation.push({ role: "assistant", content: firstMessage });
     }
 
@@ -873,7 +877,7 @@ Se quiser, já me diga:
       const text = input.value.trim();
       if(!text) return;
 
-      addMessage("user", text);
+      addMessage(text, "user");
       input.value = "";
       autoResize();
 
