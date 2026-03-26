@@ -50,9 +50,9 @@ Responda em português do Brasil.
 
     const data = await response.json();
 
-    const reply =
-      data.output_text ||
-      "Posso te ajudar com sites, landing pages, design e social media. Me conta o que você precisa 😊";
+   const reply =
+  data.output?.[0]?.content?.[0]?.text ||
+  "Posso te ajudar com sites, landing pages, design e social media 😊";
 
     const lower = (message || "").toLowerCase();
 
