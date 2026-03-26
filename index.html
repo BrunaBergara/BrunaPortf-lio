@@ -1,6 +1,299 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <style>
+    :root{
+      --bg:#0b0b0f;
+      --card:#12131a;
+      --card-2:#181a22;
+      --line:rgba(255,255,255,.08);
+      --text:#f5f7fb;
+      --muted:#b7bfd1;
+      --accent:#ffffff;
+      --accent-dark:#000000;
+      --success:#25D366;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:transparent}
+
+    .ai-launcher{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:99999;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .ai-chip{
+      background:rgba(17,17,17,.92);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      padding:12px 16px;
+      border-radius:999px;
+      font-size:14px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+    }
+
+    .ai-button{
+      width:64px;
+      height:64px;
+      border:none;
+      border-radius:50%;
+      cursor:pointer;
+      background:linear-gradient(135deg,#111,#2b2f3b);
+      color:#fff;
+      font-size:24px;
+      box-shadow:var(--shadow);
+      transition:.25s ease;
+    }
+
+    .ai-button:hover{transform:translateY(-2px) scale(1.02)}
+
+    .ai-panel{
+      position:fixed;
+      right:24px;
+      bottom:100px;
+      width:390px;
+      height:680px;
+      max-width:calc(100vw - 24px);
+      max-height:calc(100vh - 130px);
+      background:linear-gradient(180deg,#0f1117,#151824);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:none;
+      flex-direction:column;
+      z-index:99999;
+    }
+
+    .ai-header{
+      padding:18px 18px 14px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0));
+    }
+
+    .ai-header-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .ai-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .ai-avatar{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#fff,#cfd6e6);
+      color:#000;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .ai-title{
+      font-size:15px;
+      font-weight:700;
+      margin:0;
+      line-height:1.2;
+    }
+
+    .ai-subtitle{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .ai-close{
+      border:none;
+      background:transparent;
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      opacity:.8;
+    }
+
+    .ai-quickbar{
+      padding:12px 18px 0;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .quick-btn{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .quick-btn:hover{
+      background:rgba(255,255,255,.08);
+    }
+
+    .ai-messages{
+      flex:1;
+      overflow:auto;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      scroll-behavior:smooth;
+    }
+
+    .msg-row{
+      display:flex;
+      width:100%;
+    }
+
+    .msg-row.user{justify-content:flex-end}
+    .msg-row.bot{justify-content:flex-start}
+
+    .msg{
+      max-width:84%;
+      padding:14px 16px;
+      border-radius:20px;
+      font-size:14px;
+      line-height:1.55;
+      white-space:pre-wrap;
+      word-wrap:break-word;
+    }
+
+    .msg.bot{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.07);
+      color:var(--text);
+      border-top-left-radius:8px;
+    }
+
+    .msg.user{
+      background:#fff;
+      color:#000;
+      border-top-right-radius:8px;
+      font-weight:500;
+    }
+
+    .typing{
+      display:inline-flex;
+      gap:5px;
+      align-items:center;
+      min-height:20px;
+    }
+
+    .typing span{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#cbd3e3;
+      opacity:.6;
+      animation:blink 1.2s infinite;
+    }
+
+    .typing span:nth-child(2){animation-delay:.15s}
+    .typing span:nth-child(3){animation-delay:.3s}
+
+    @keyframes blink{
+      0%,80%,100%{transform:scale(.8);opacity:.35}
+      40%{transform:scale(1);opacity:1}
+    }
+
+    .ai-footer{
+      padding:14px;
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.14);
+    }
+
+    .whatsapp-cta{
+      display:none;
+      width:100%;
+      border:none;
+      background:var(--success);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:16px;
+      font-weight:700;
+      cursor:pointer;
+      margin-bottom:10px;
+      font-size:14px;
+    }
+
+    .ai-form{
+      display:flex;
+      gap:10px;
+      align-items:flex-end;
+    }
+
+    .ai-input{
+      flex:1;
+      min-height:54px;
+      max-height:130px;
+      resize:none;
+      padding:16px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      outline:none;
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .ai-input::placeholder{color:#a8b0c2}
+
+    .send-btn{
+      width:54px;
+      height:54px;
+      border:none;
+      border-radius:18px;
+      background:#fff;
+      color:#000;
+      font-size:18px;
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    .ai-note{
+      margin-top:9px;
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    @media (max-width: 640px){
+      .ai-panel{
+        right:10px;
+        left:10px;
+        bottom:88px;
+        width:auto;
+        height:76vh;
+      }
+      .ai-launcher{
+        right:14px;
+        bottom:14px;
+      }
+      .ai-chip{
+        display:none;
+      }
+    }
+  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Bruna Scomparim</title>
@@ -336,18 +629,54 @@
     </section>
 
     <section id="contato" class="py-20 bg-white">
-        <div class="max-w-2xl mx-auto px-4">
-            <div class="bg-slate-900 rounded-3xl p-6 md:p-8 shadow-2xl">
-                <div id="chatBody" class="chat-container mb-6 flex flex-col space-y-4">
-                    <div class="bubble bg-slate-800 text-white self-start">Olá! Sou o assistente da Bruna. Qual o seu nome?</div>
-                </div>
-                <div class="flex gap-2">
-                    <input type="text" id="chatInput" placeholder="Sua mensagem..." class="flex-1 bg-slate-800 border-none rounded-full px-5 py-3 text-white outline-none">
-                    <button onclick="handleSendMessage()" class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-            </div>
-        </div>
+      
     </section>
+
+        <div class="ai-launcher">
+            <div class="ai-chip">Atendimento inteligente • Bruna</div>
+            <button class="ai-button" id="openChatBtn" aria-label="Abrir atendimento">✦</button>
+        </div>
+
+    <section class="ai-panel" id="aiPanel" aria-live="polite">
+    <div class="ai-header">
+      <div class="ai-header-top">
+        <div class="ai-brand">
+          <div class="ai-avatar">BS</div>
+          <div>
+            <h3 class="ai-title">Assistente Virtual • Bruna Scomparim</h3>
+            <div class="ai-subtitle">Sites, landing pages, social media e design</div>
+          </div>
+        </div>
+        <button class="ai-close" id="closeChatBtn" aria-label="Fechar">×</button>
+      </div>
+    </div>
+
+    <div class="ai-quickbar">
+      <button class="quick-btn" data-prompt="Quero um site profissional para minha empresa">Quero um site</button>
+      <button class="quick-btn" data-prompt="Preciso de uma landing page para vender mais">Landing page</button>
+      <button class="quick-btn" data-prompt="Quero ajuda com social media e artes">Social media</button>
+      <button class="quick-btn" data-prompt="Quais serviços vocês oferecem?">Serviços</button>
+    </div>
+
+    <div class="ai-messages" id="messages"></div>
+
+    <div class="ai-footer">
+      <button class="whatsapp-cta" id="whatsBtn">Continuar no WhatsApp</button>
+
+      <form class="ai-form" id="chatForm">
+        <textarea
+          class="ai-input"
+          id="userInput"
+          placeholder="Escreva sua mensagem..."
+          rows="1"
+        ></textarea>
+        <button class="send-btn" type="submit">➜</button>
+      </form>
+
+      <div class="ai-note">Atendimento com IA + encaminhamento para WhatsApp quando fizer sentido.</div>
+    </div>
+     </section>
+
 
     <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
@@ -362,6 +691,198 @@
         </div>
     </footer>
 <script>
+     const state = {
+      isOpen: false,
+      conversation: [],
+      leadName: "",
+      leadGoal: "",
+      leadService: "",
+      assistantTurns: 0
+    };
+
+    const panel = document.getElementById("aiPanel");
+    const messagesEl = document.getElementById("messages");
+    const openBtn = document.getElementById("openChatBtn");
+    const closeBtn = document.getElementById("closeChatBtn");
+    const form = document.getElementById("chatForm");
+    const input = document.getElementById("userInput");
+    const whatsBtn = document.getElementById("whatsBtn");
+
+    function togglePanel(force = null){
+      state.isOpen = force !== null ? force : !state.isOpen;
+      panel.style.display = state.isOpen ? "flex" : "none";
+
+      if(state.isOpen && state.conversation.length === 0){
+        welcomeFlow();
+      }
+    }
+
+    openBtn.addEventListener("click", () => togglePanel(true));
+    closeBtn.addEventListener("click", () => togglePanel(false));
+
+    document.querySelectorAll(".quick-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        togglePanel(true);
+        input.value = btn.dataset.prompt;
+        form.dispatchEvent(new Event("submit"));
+      });
+    });
+
+    function autoResize(){
+      input.style.height = "54px";
+      input.style.height = Math.min(input.scrollHeight, 130) + "px";
+    }
+
+    input.addEventListener("input", autoResize);
+
+    function addMessage(role, content){
+      const row = document.createElement("div");
+      row.className = `msg-row ${role}`;
+
+      const bubble = document.createElement("div");
+      bubble.className = `msg ${role}`;
+      bubble.textContent = content;
+
+      row.appendChild(bubble);
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addTyping(){
+      const row = document.createElement("div");
+      row.className = "msg-row bot";
+      row.id = "typingRow";
+
+      const bubble = document.createElement("div");
+      bubble.className = "msg bot";
+      bubble.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+
+      row.appendChild(bubble);
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function removeTyping(){
+      const typing = document.getElementById("typingRow");
+      if(typing) typing.remove();
+    }
+
+    function showWhatsCTA(show = true){
+      whatsBtn.style.display = show ? "block" : "none";
+    }
+
+    function buildWhatsAppMessage(){
+      const history = state.conversation
+        .slice(-8)
+        .map(item => `${item.role === "user" ? "Cliente" : "Assistente"}: ${item.content}`)
+        .join("\\n");
+
+      const text =
+`Olá, vim pelo site da Bruna Scomparim.
+${state.leadName ? `Meu nome é ${state.leadName}.` : ""}
+${state.leadService ? `Tenho interesse em ${state.leadService}.` : ""}
+${state.leadGoal ? `Meu objetivo é: ${state.leadGoal}.` : ""}
+
+Resumo da conversa:
+${history}
+
+Quero continuar o atendimento por aqui.`;
+
+      return `https://wa.me/5515998885465?text=${encodeURIComponent(text)}`;
+    }
+
+    whatsBtn.addEventListener("click", () => {
+      window.open(buildWhatsAppMessage(), "_blank");
+    });
+
+    function welcomeFlow(){
+      const firstMessage =
+`Olá! Sou a assistente virtual da Bruna Scomparim ✨
+Posso te orientar sobre sites, landing pages, design, artes e social media.
+
+Se quiser, já me diga:
+• qual serviço você procura
+• qual é o seu negócio
+• e qual resultado você quer alcançar`;
+
+      addMessage("bot", firstMessage);
+      state.conversation.push({ role: "assistant", content: firstMessage });
+    }
+
+    function extractLeadHints(text){
+      const t = text.toLowerCase();
+
+      if(!state.leadService){
+        if(t.includes("landing")) state.leadService = "landing page";
+        else if(t.includes("site")) state.leadService = "site profissional";
+        else if(t.includes("social")) state.leadService = "social media";
+        else if(t.includes("arte") || t.includes("flyer") || t.includes("design")) state.leadService = "design e artes";
+      }
+
+      if(!state.leadGoal){
+        if(t.includes("vender")) state.leadGoal = "vender mais";
+        else if(t.includes("cliente")) state.leadGoal = "atrair mais clientes";
+        else if(t.includes("profissional")) state.leadGoal = "fortalecer o posicionamento da marca";
+      }
+
+      const nameMatch = text.match(/meu nome é ([a-zà-ú\s]+)/i);
+      if(nameMatch && !state.leadName){
+        state.leadName = nameMatch[1].trim();
+      }
+    }
+      
+        async function sendToAgent(userText) {
+            try {
+                const response = await fetch("/api/agent", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: userText,
+                history: []
+            })
+        });
+
+        const data = await response.json();
+
+        addMessage(data.reply, "bot");
+
+        if (data.offer_whatsapp) {
+            showWhatsButton();
+        }
+
+        } catch (error) {
+            addMessage("Erro ao conectar com atendimento. Tente novamente ou vá para o WhatsApp.", "bot");
+        }
+        }
+
+        function sendMessage() {
+        const input = document.getElementById("userInput");
+        const text = input.value.trim();
+
+        if (!text) return;
+
+        addMessage(text, "user");
+        input.value = "";
+
+        sendToAgent(text); // 🔥 AQUI CHAMA A IA
+        }
+
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if(!text) return;
+
+      addMessage("user", text);
+      input.value = "";
+      autoResize();
+
+      await sendToAgent(text);
+    });
+
+    
     const portfolioData = {
         identidade: { 
             title: "Redes Sociais", 
@@ -487,42 +1008,8 @@
 
     // --- MUDANÇAS DO CHATBOT ---
 
-    function handleSendMessage() {
-        const input = document.getElementById('chatInput');
-        const nomeUsuario = input.value.trim();
-        
-        if (nomeUsuario !== '') {
-            // Adiciona a mensagem (nome) na tela de chat
-            const chatBody = document.getElementById('chatBody');
-            chatBody.innerHTML += `<div class="bubble bg-blue-600 text-white self-end ml-auto">${nomeUsuario}</div>`;
-            
-            // Rola o chat para o final
-            chatBody.scrollTop = chatBody.scrollHeight;
-            
-            // Monta a mensagem final personalizada
-            const mensagemWhatsApp = `Olá, Bruna! Meu nome é ${nomeUsuario}. Estou interessado em seus serviços. Pode me dar um retorno?`;
-            const numeroWhatsApp = "5515998885465";
-            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
-            
-            // Abre o WhatsApp em uma nova aba
-            window.open(url, '_blank');
-            
-            // Limpa o campo de digitação
-            input.value = '';
-        }
-    }
 
-    // Permite enviar a mensagem apertando a tecla Enter
-    document.addEventListener('DOMContentLoaded', () => {
-        const chatInput = document.getElementById('chatInput');
-        if(chatInput) {
-            chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleSendMessage();
-                }
-            });
-        }
-    });
+
 </script>
     
 </body>
