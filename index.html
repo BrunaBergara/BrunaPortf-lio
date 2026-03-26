@@ -833,22 +833,24 @@ Se quiser, já me diga:
       }
     }
       
-     async function sendToAgent(userText) {
+ async function sendToAgent(userText) {
   let reply = "";
-
   const text = userText.toLowerCase();
 
-  if (text.includes("site")) {
-    reply = "Perfeito! Me conta: qual é o seu negócio e o objetivo do site?";
+  if (text.includes("oi") || text.includes("olá")) {
+    reply = "Oi! 😊 Me conta, você está buscando um site, landing page ou social media?";
+  } 
+  else if (text.includes("site")) {
+    reply = "Perfeito! Me fala: qual é o seu negócio e o objetivo do site?";
   } 
   else if (text.includes("landing")) {
-    reply = "Ótima escolha! Landing page é ideal para conversão. O que você quer vender?";
+    reply = "Ótima escolha! Landing page é ideal para vendas. O que você quer vender?";
   } 
   else if (text.includes("social")) {
-    reply = "Legal! Você quer mais engajamento, vendas ou posicionamento?";
+    reply = "Legal! Você quer crescer seguidores, engajamento ou vendas?";
   } 
   else if (text.includes("preço") || text.includes("valor")) {
-    reply = "Os valores variam conforme o projeto. Posso te explicar melhor no WhatsApp 😉";
+    reply = "Os valores variam conforme o projeto 😊 Posso entender melhor sua necessidade e te passar um orçamento no WhatsApp.";
     showWhatsCTA(true);
   } 
   else {
@@ -859,20 +861,6 @@ Se quiser, já me diga:
     addMessage(reply, "bot");
   }, 500);
 }
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage(text, "user");
-  input.value = "";
-  autoResize();
-
-  await sendToAgent(text);
-});
-
     const portfolioData = {
         identidade: { 
             title: "Redes Sociais", 
