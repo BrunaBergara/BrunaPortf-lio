@@ -735,17 +735,18 @@
 
     input.addEventListener("input", autoResize);
 
-    function addMessage(role, content){
-      const row = document.createElement("div");
-      row.className = `msg-row ${role}`;
+    const data = await response.json();
+    console.log(data);
 
-      const bubble = document.createElement("div");
-      bubble.className = `msg ${role}`;
-      bubble.textContent = content;
+    addMessage(data.reply, "bot");
 
-      row.appendChild(bubble);
-      messagesEl.appendChild(row);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+    function addMessage(text, type) {
+        const msg = document.createElement("div");
+        msg.classList.add("message", type);
+        msg.innerText = text;
+
+        document.getElementById("messages").appendChild(msg);
+        msg.scrollIntoView();
     }
 
     function addTyping(){
@@ -805,7 +806,7 @@ Se quiser, já me diga:
 • qual é o seu negócio
 • e qual resultado você quer alcançar`;
 
-      addMessage("bot", firstMessage);
+      addMessage(data.reply, "bot", firstMessage);
       state.conversation.push({ role: "assistant", content: firstMessage });
     }
 
@@ -882,7 +883,7 @@ Se quiser, já me diga:
       await sendToAgent(text);
     });
 
-    
+
     const portfolioData = {
         identidade: { 
             title: "Redes Sociais", 
