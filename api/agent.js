@@ -6,6 +6,10 @@ export default async function handler(req, res) {
   try {
     const { message, history = [] } = req.body;
 
+    if (!message) {
+      return res.status(400).json({ error: "Mensagem vazia" });
+    }
+
     const systemPrompt = `
 Você é a assistente virtual da Bruna Scomparim.
 
@@ -35,26 +39,23 @@ Responda em português do Brasil.
       body: JSON.stringify({
         model: "gpt-5.4-mini",
         input: [
-          {
-            role: "system",
-            content: systemPrompt
-          },
+          { role: "system", content: systemPrompt },
           ...history,
-          {
-            role: "user",
-            content: message
-          }
+          { role: "user", content: message }
         ]
       })
     });
 
     const data = await response.json();
 
-   const reply =
-  data.output?.[0]?.content?.[0]?.text ||
-  "Posso te ajudar com sites, landing pages, design e social media 😊";
+    console.log("OPENAI RESPONSE:", JSON.stringify(data));
 
-    const lower = (message || "").toLowerCase();
+    const reply =
+      data.output?.[0]?.content?.[0]?.text ||
+      data.output_text ||
+      "Posso te ajudar com sites, landing pages, design e social media 😊";
+
+    const lower = message.toLowerCase();
 
     const offer_whatsapp =
       lower.includes("preço") ||
@@ -68,7 +69,9 @@ Responda em português do Brasil.
       reply,
       offer_whatsapp
     });
+
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ error: "Erro no servidor" });
   }
 }
