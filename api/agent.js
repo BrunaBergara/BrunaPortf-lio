@@ -50,10 +50,20 @@ Responda em português do Brasil.
 
     console.log("OPENAI RESPONSE:", JSON.stringify(data));
 
-    const reply =
-      data.output?.[0]?.content?.[0]?.text ||
-      data.output_text ||
-      "Posso te ajudar com sites, landing pages, design e social media 😊";
+    let reply = "Posso te ajudar com sites, landing pages, design e social media 😊";
+
+if (data.output && Array.isArray(data.output)) {
+  for (const item of data.output) {
+    if (item.content && Array.isArray(item.content)) {
+      for (const content of item.content) {
+        if (content.text) {
+          reply = content.text;
+          break;
+        }
+      }
+    }
+  }
+}
 
     const lower = message.toLowerCase();
 
