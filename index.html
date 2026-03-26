@@ -735,10 +735,7 @@
 
     input.addEventListener("input", autoResize);
 
-    const data = await response.json();
-    console.log(data);
-
-    addMessage(data.reply, "bot");
+    
 
     function addMessage(text, type) {
         const msg = document.createElement("div");
@@ -849,9 +846,9 @@ Se quiser, já me diga:
 
         addMessage(data.reply, "bot");
 
-        if (data.offer_whatsapp) {
-            showWhatsButton();
-        }
+       if (data.offer_whatsapp) {
+    showWhatsCTA(true);
+}
 
         } catch (error) {
             addMessage("Erro ao conectar com atendimento. Tente novamente ou vá para o WhatsApp.", "bot");
@@ -936,10 +933,7 @@ Se quiser, já me diga:
         }
     };
 
-    const reply =
-  data.output?.[0]?.content?.[0]?.text ||
-  data.output_text ||
-  "Posso te ajudar com sites, landing pages e design 😊";
+    
 
     function openGallery(cat) {
         const data = portfolioData[cat];
