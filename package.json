@@ -1,7 +1,5 @@
 {
   "name": "site-bruna",
   "version": "1.0.0",
-  "type": "module",
-  "reply": "texto da IA aqui",
-  "offer_whatsapp": true
+  "type": "module"
 }
