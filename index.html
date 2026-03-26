@@ -936,6 +936,11 @@ Se quiser, já me diga:
         }
     };
 
+    const reply =
+  data.output?.[0]?.content?.[0]?.text ||
+  data.output_text ||
+  "Posso te ajudar com sites, landing pages e design 😊";
+
     function openGallery(cat) {
         const data = portfolioData[cat];
         document.getElementById('modalTitle').innerText = data.title;
