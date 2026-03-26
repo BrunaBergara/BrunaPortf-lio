@@ -833,57 +833,45 @@ Se quiser, já me diga:
       }
     }
       
-        async function sendToAgent(userText) {
-            try {
-                const response = await fetch("/api/agent", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: userText,
-                history: []
-            })
-        });
+     async function sendToAgent(userText) {
+  let reply = "";
 
-        const data = await response.json();
+  const text = userText.toLowerCase();
 
-        addMessage(data.reply, "bot");
-
-       if (data.offer_whatsapp) {
+  if (text.includes("site")) {
+    reply = "Perfeito! Me conta: qual é o seu negócio e o objetivo do site?";
+  } 
+  else if (text.includes("landing")) {
+    reply = "Ótima escolha! Landing page é ideal para conversão. O que você quer vender?";
+  } 
+  else if (text.includes("social")) {
+    reply = "Legal! Você quer mais engajamento, vendas ou posicionamento?";
+  } 
+  else if (text.includes("preço") || text.includes("valor")) {
+    reply = "Os valores variam conforme o projeto. Posso te explicar melhor no WhatsApp 😉";
     showWhatsCTA(true);
+  } 
+  else {
+    reply = "Perfeito! Me explica melhor o que você precisa que eu te ajudo 😊";
+  }
+
+  setTimeout(() => {
+    addMessage(reply, "bot");
+  }, 500);
 }
 
-        } catch (error) {
-            addMessage("Erro ao conectar com atendimento. Tente novamente ou vá para o WhatsApp.", "bot");
-        }
-        }
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-        function sendMessage() {
-        const input = document.getElementById("userInput");
-        const text = input.value.trim();
+  const text = input.value.trim();
+  if (!text) return;
 
-        if (!text) return;
+  addMessage(text, "user");
+  input.value = "";
+  autoResize();
 
-        addMessage(text, "user");
-        input.value = "";
-
-        sendToAgent(text); // 🔥 AQUI CHAMA A IA
-        }
-
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const text = input.value.trim();
-      if(!text) return;
-
-      addMessage(text, "user");
-      input.value = "";
-      autoResize();
-
-      await sendToAgent(text);
-    });
-
+  await sendToAgent(text);
+});
 
     const portfolioData = {
         identidade: { 
